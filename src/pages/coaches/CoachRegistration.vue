@@ -15,13 +15,10 @@ export default {
     CoachForm,
   },
   methods: {
-    // pass formData from CoachForm (from emit) to store action
     saveData(payload) {
       // namespace/action name
       this.$store.dispatch('coaches/registerCoach', payload);
-      // .replace() so they can't go back to the form
       this.$router.replace('/coaches');
-      // this.$router.push('/coaches')
     },
   },
 };

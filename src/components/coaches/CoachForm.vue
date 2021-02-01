@@ -1,6 +1,5 @@
 <template>
-  <!-- this form data will be passed to CoachRegistration to be sent to store -->
-  <!-- can be sent to store from this cpmnt but helps re-usability of this cmpnt -->
+  <!-- this form data will be passed to CoachRegistration to be sent to store (better re-usability) -->
   <form @submit.prevent="submitForm">
     <div class="form-control" :class="{ invalid: !firstName.isValid }">
       <label for="firstname">first name</label>
@@ -91,30 +90,29 @@ export default {
     return {
       firstName: {
         val: '',
-        isValid: true
+        isValid: true,
       },
       lastName: {
         val: '',
-        isValid: true
+        isValid: true,
       },
       description: {
         val: '',
-        isValid: true
+        isValid: true,
       },
       rate: {
         val: null,
-        isValid: true
+        isValid: true,
       },
       areas: {
         val: [],
-        isValid: true
+        isValid: true,
       },
-      formIsValid: true
+      formIsValid: true,
     };
   },
   methods: {
     validateForm() {
-      // go through each input and see if valid
       this.formIsValid = true; // reset
       if (this.firstName.val === '') {
         this.firstName.isValid = false;
@@ -140,25 +138,22 @@ export default {
     },
     submitForm() {
       this.validateForm();
-      // end submit if invalid form
       if (!this.formIsValid) {
         return;
       }
-      // groups all form data together
       const formData = {
         first: this.firstName.val,
         last: this.lastName.val,
         desc: this.description.val,
         rate: this.rate.val,
-        areas: this.areas.val
+        areas: this.areas.val,
       };
-      // console.log(formData);
       this.$emit('save-data', formData);
     },
     clearValidity(input) {
       this[input].isValid = true;
-    }
-  }
+    },
+  },
 };
 </script>
 

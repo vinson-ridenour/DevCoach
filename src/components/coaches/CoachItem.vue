@@ -3,7 +3,6 @@
     <h3>{{ fullName }}</h3>
     <h4>${{ rate }}/hour</h4>
     <div>
-      <!-- <span v-for="area in areas" :key="area">{{ area }}</span> -->
       <base-badge
         v-for="area in areas"
         :title="area"
@@ -12,7 +11,6 @@
       ></base-badge>
     </div>
     <div class="actions">
-      <!-- use :to since dynamic link -->
       <base-button mode="outline" link :to="coachContactLink"
         >contact</base-button
       >
@@ -30,15 +28,13 @@ export default {
       return this.firstName + ' ' + this.lastName;
     },
     coachContactLink() {
-      // return '/coaches/' + this.id + 'contact';
       // more flexible if path ever changes
       return this.$route.path + '/' + this.id + '/contact';
-      // or return this.$route.path + '/contact'; ??
     },
     coachDetailsLink() {
       return this.$route.path + '/' + this.id;
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -1,16 +1,14 @@
 export default {
   async contactCoach(context, payload) {
     const newRequest = {
-      // id: new Date().toISOString(),
-      // coachId: payload.coachId,
       userEmail: payload.email,
-      message: payload.message
+      message: payload.message,
     };
     const response = await fetch(
       `https://find-a-coach-39701-default-rtdb.firebaseio.com/requests/${payload.coachId}.json`,
       {
         method: 'POST',
-        body: JSON.stringify(newRequest)
+        body: JSON.stringify(newRequest),
       }
     );
 
@@ -24,12 +22,11 @@ export default {
     }
     // FB returns a UID for every new posted req (.name per FB docs)
     newRequest.id = responseData.name;
-    newRequest.coachId = payload.coachId; // stores in local data
+    newRequest.coachId = payload.coachId;
     // pass mutation name, payload name
     context.commit('addRequest', newRequest);
   },
   async fetchRequests(context) {
-    // only requests for active user (coach)
     const coachId = context.rootGetters.userId;
     const token = context.rootGetters.token;
     const response = await fetch(
@@ -54,11 +51,11 @@ export default {
         id: key,
         coachId: coachId,
         userEmail: responseData[key].userEmail,
-        message: responseData[key].message
+        message: responseData[key].message,
       };
       requests.push(request);
     }
     // send to mutation
     context.commit('setRequests', requests);
-  }
+  },
 };

@@ -25,26 +25,23 @@ export default {
       filters: {
         frontend: true,
         backend: true,
-        career: true
-      }
+        career: true,
+      },
     };
   },
   methods: {
     // get e object from a default dom event (change)
     setFilter(e) {
-      const inputId = e.target.id; // id bound to the inputs (frontend, etc)
-      const isActive = e.target.checked; // checked or not
+      const inputId = e.target.id; // frontend, etc
+      const isActive = e.target.checked;
       const updatedFilters = {
-        // copy all properties into new object
         ...this.filters,
-        // override 1 property dynamically
-        [inputId]: isActive
+        [inputId]: isActive,
       };
       this.filters = updatedFilters;
-      // lets parent cmpnt know about updated filters
       this.$emit('change-filter', updatedFilters);
-    }
-  }
+    },
+  },
 };
 </script>
 

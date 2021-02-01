@@ -11,6 +11,7 @@
       <base-spinner></base-spinner>
     </base-dialog>
     <base-card>
+      <h3>connect with your ideal &lt;Coach /&gt;!</h3>
       <form @submit.prevent="submitForm">
         <div class="form-control">
           <label for="email">email</label>
@@ -40,7 +41,7 @@ export default {
       formIsValid: true,
       mode: 'login',
       isLoading: false,
-      error: null
+      error: null,
     };
   },
   computed: {
@@ -57,7 +58,7 @@ export default {
       } else {
         return 'login';
       }
-    }
+    },
   },
   methods: {
     async submitForm() {
@@ -71,9 +72,8 @@ export default {
       this.isLoading = true;
 
       const actionPayload = {
-        // payload
         email: this.email,
-        password: this.password
+        password: this.password,
       };
 
       try {
@@ -101,16 +101,14 @@ export default {
     },
     handleError() {
       this.error = null;
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
 form {
   margin: 1rem;
-  /* border: 1px solid #ccc; */
-  /* border-radius: 12px; */
   padding: 1rem;
 }
 

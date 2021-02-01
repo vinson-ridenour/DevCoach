@@ -1,5 +1,5 @@
 <template>
-  <!-- need wrapping div for transition animation -->
+  <!-- wrapping div for transition animation -->
   <div>
     <section>
       <base-card>
@@ -10,10 +10,9 @@
     <section>
       <base-card>
         <header>
-          <h2>Interested? Reach out now!</h2>
-          <base-button link :to="contactLink">Contact</base-button>
+          <h2>interested? reach out now!</h2>
+          <base-button link :to="contactLink">contact</base-button>
         </header>
-        <!-- this is where child routes of CoachDetail will be loaded (in this router view, which will load ContactCoach cmpnt)  -->
         <router-view></router-view>
       </base-card>
     </section>
@@ -33,7 +32,7 @@
 
 <script>
 export default {
-  props: ['id'], // why id? cmpnt will be loaded thru routing (coaches/:id), with props: true. then use this id to fetch relevant coach data from store
+  props: ['id'],
   data() {
     return {
       selectedCoach: null,
@@ -53,16 +52,13 @@ export default {
       return this.selectedCoach.description;
     },
     contactLink() {
-      return this.$route.path + '/' + this.id + '/contact'; // same as selectedCoach.id but we had this.id already as a prop
+      return this.$route.path + '/contact';
     },
   },
   created() {
-    // when created, contact store to fetch coach data using id
-    // find the coach that matches the id passed in as prop: true
     this.selectedCoach = this.$store.getters['coaches/coaches'].find(
       (coach) => coach.id === this.id
     );
-    // console.log(this.selectedCoach);
   },
 };
 </script>

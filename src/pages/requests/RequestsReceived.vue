@@ -5,7 +5,6 @@
       title="An error occurred!"
       @close="handleError"
     >
-      <!-- unnamed slot -->
       <p>{{ error }}</p>
     </base-dialog>
     <section>
@@ -15,7 +14,6 @@
         </header>
         <base-spinner v-if="isLoading"></base-spinner>
         <ul v-else-if="hasRequests && !isLoading">
-          <!-- req.userEmail/message as named in action  -->
           <request-item
             v-for="req in receivedRequests"
             :key="req.id"
@@ -23,7 +21,7 @@
             :message="req.message"
           ></request-item>
         </ul>
-        <h3 v-else>you have no requests</h3>
+        <h3 v-else>you don't have any requests...yet!</h3>
       </base-card>
     </section>
   </div>

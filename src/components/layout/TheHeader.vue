@@ -1,7 +1,7 @@
 <template>
   <header>
     <nav>
-      <h1><router-link to="/">&lt;DevCoach/&gt;</router-link></h1>
+      <h1><router-link to="/">&lt;DevCoach /&gt;</router-link></h1>
       <ul>
         <li>
           <router-link to="/coaches">all coaches</router-link>
@@ -21,9 +21,7 @@
 </template>
 
 <script>
-import BaseButton from '../ui/BaseButton.vue';
 export default {
-  components: { BaseButton },
   computed: {
     isLoggedIn() {
       return this.$store.getters.isAuthenticated;

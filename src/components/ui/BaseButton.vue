@@ -1,10 +1,8 @@
 <template>
-  <!-- only one of the 2 (button or router-link) should be rendered at any one time -->
   <button v-if="!link" :class="mode">
     <slot></slot>
   </button>
   <router-link v-else :to="to" :class="mode">
-    <!-- this slot allows us to put 'stuff' between base-button components (that are links) e.g. CoachesList 'register as coach' text-->
     <slot></slot>
   </router-link>
 </template>
@@ -17,21 +15,21 @@ export default {
     mode: {
       type: String,
       required: false,
-      default: null
+      default: null,
     },
     // determines whether we render button (false) or link (true)
     link: {
       type: Boolean,
       required: false,
-      default: false
+      default: false,
     },
     // if we render a router-link with link
     to: {
       type: String,
       required: false,
-      default: '/'
-    }
-  }
+      default: '/',
+    },
+  },
 };
 </script>
 
@@ -40,7 +38,7 @@ export default {
 button,
 a {
   text-decoration: none;
-  padding: 0.75rem 1.5rem;
+  padding: 0.6rem 1rem;
   font: inherit;
   background-color: #325aff;
   border: 1px solid #325aff;
@@ -75,6 +73,6 @@ button:active {
 .flat:active,
 .outline:hover,
 .outline:active {
-  background-color: #fff;
+  background-color: #dbc1c9;
 }
 </style>

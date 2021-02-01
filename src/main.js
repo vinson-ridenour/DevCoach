@@ -12,7 +12,7 @@ import BaseDialog from './components/ui/BaseDialog.vue';
 // create app
 const app = createApp(App);
 
-// initial router & store
+// initiate router & store
 app.use(router);
 app.use(store);
 

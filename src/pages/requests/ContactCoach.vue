@@ -1,5 +1,4 @@
 <template>
-  <!-- child route - so won't be loaded to replace current cpmnt - needs router-view in parent cmpnt (CoachDetail) -->
   <form @submit.prevent="submitForm">
     <div class="form-control">
       <label for="email">email address</label>
@@ -22,7 +21,7 @@ export default {
     return {
       email: '',
       message: '',
-      formIsValid: true
+      formIsValid: true,
     };
   },
   methods: {
@@ -36,19 +35,16 @@ export default {
         this.formIsValid = false;
         return;
       }
-      // request is a piece of data to manage with store
       // namespace/action, payload passed
       this.$store.dispatch('requests/contactCoach', {
         email: this.email,
         message: this.message,
-        // can also get this using props: true
-        coachId: this.$route.params.id
+        coachId: this.$route.params.id,
       });
-      // console.log('msg sent!');
-      // feature -> add err msging / loadspinner here b4 redirect
+      // add feature -> add err msging / loadspinner here b4 redirect
       this.$router.replace('/coaches');
-    }
-  }
+    },
+  },
 };
 </script>
 

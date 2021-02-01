@@ -1,11 +1,8 @@
 <template>
   <the-header></the-header>
-  <!-- slotProps for css animations -->
-  <router-view v-slot="slotProps">
-    <transition name="route" mode="out-in">
-      <component :is="slotProps.Component"></component>
-    </transition>
-  </router-view>
+  <transition name="route" mode="out-in">
+    <router-view />
+  </transition>
 </template>
 
 <script>
@@ -13,7 +10,6 @@ import TheHeader from './components/layout/TheHeader.vue';
 
 export default {
   components: {
-    // register as local cmpnts
     TheHeader,
   },
   computed: {
@@ -61,11 +57,11 @@ body {
 }
 
 .route-enter-active {
-  transition: all 0.3s ease-out;
+  transition: all 0.7s ease-out;
 }
 
 .route-leave-active {
-  transition: all 0.3s ease-in;
+  transition: all 0.7s ease-in;
 }
 
 .route-enter-to,

@@ -1,16 +1,15 @@
 let timer;
 export default {
   async login(context, payload) {
-    // return so promise from auth, cpmnts can then know resolve/error
     return context.dispatch('auth', {
       ...payload,
-      mode: 'login'
+      mode: 'login',
     });
   },
   async signup(context, payload) {
     return context.dispatch('auth', {
       ...payload,
-      mode: 'signup'
+      mode: 'signup',
     });
   },
   async auth(context, payload) {
@@ -21,7 +20,6 @@ export default {
 
     if (mode === 'signup') {
       url =
-        // from FB auth api docs + apikey
         'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAKoUmBqjT4katRbDTQ6XU35SmMASqHyJQ';
     }
     const response = await fetch(url, {
@@ -29,16 +27,15 @@ export default {
       body: JSON.stringify({
         email: payload.email,
         password: payload.password,
-        returnSecureToken: true
-      })
+        returnSecureToken: true,
+      }),
     });
 
     const responseData = await response.json();
 
     if (!response.ok) {
-      // console.log(responseData);
       const error = new Error(
-        responseData.message || 'Failed to authenticate. Please try again.'
+        responseData.message || 'Account already exists! Please login instead.'
       );
       throw error;
     }
@@ -59,8 +56,8 @@ export default {
     context.commit('setUser', {
       // our name: FB auth api name
       token: responseData.idToken,
-      userId: responseData.localId
-      // tokenExpiration: expirationDate // dont need in vuex cuz localStorage is enough
+      userId: responseData.localId,
+      // tokenExpiration: expirationDate // dont need in vuex cuz now in localStorage
     });
   },
   autoLogin(context) {
@@ -68,7 +65,7 @@ export default {
     const userId = localStorage.getItem('userId');
     const tokenExpiration = localStorage.getItem('tokenExpiration');
 
-    //diff in ms btwn time when token expires & current time
+    // diff in ms btwn time when token expires & current time
     const expiresIn = +tokenExpiration - new Date().getTime();
 
     if (expiresIn < 0) {
@@ -84,8 +81,7 @@ export default {
     if (token && userId) {
       context.commit('setUser', {
         token: token,
-        userId: userId
-        // tokenExpiration: null
+        userId: userId,
       });
     }
   },
@@ -99,13 +95,12 @@ export default {
 
     context.commit('setUser', {
       token: null,
-      userId: null
-      // tokenExpiration: null
+      userId: null,
     });
   },
   // set when autoLogout dispatched
   autoLogout(context) {
     context.dispatch('logout');
     context.commit('setAutoLogout');
-  }
+  },
 };
